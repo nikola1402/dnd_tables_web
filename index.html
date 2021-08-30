@@ -15,6 +15,13 @@
         <div class="container" style="margin-top: 2em;">
             <div class="row">
                 <div class="col">
+                    <button type="button" class="btn btn-danger" onclick="setDb('weapon_hit')"">Critical Hit and Fumble</button>
+                    <button type="button" class="btn btn-danger" onclick="setDb('madness')">Madness</button>
+                    <h1 id="selectedTable"></h1>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 2em;">
+                <div class="col">
                     <button type="button" class="btn btn-dark" onclick="generateResults();">Roll the Dice!</button>
                 </div>
                 <div class="col">
@@ -26,7 +33,6 @@
         <br>
         
         <div id="resultsTableContainer">
-            <h2>Your Results</h2>
         </div>
 
         <div id="tablesContainer">
@@ -36,7 +42,32 @@
     
      <script>
 
-        var tablesJson;
+        var tablesJson,
+            db;
+
+        const _tables = document.getElementById("tablesContainer");
+
+        function init() {
+            // this requests the file and executes a callback with the parsed result once
+            //   it is available
+            var db = "weapon_hit";
+            fetchJSONFile('https://raw.githubusercontent.com/nikola1402/dnd_tables_web/master/json_tables/' + db + '_table.json', function(data){
+                // do something with your data
+                tablesJson = data;
+                populateTables();
+                var h1 = document.getElementById("selectedTable");
+                h1.innerHTML = db + " Table";
+            });
+        }
+
+        function setDb(db) {
+            fetchJSONFile('https://raw.githubusercontent.com/nikola1402/dnd_tables_web/master/json_tables/' + db + '_table.json', function(data){
+                tablesJson = data;
+                populateTables();
+                var h1 = document.getElementById("selectedTable");
+                h1.innerHTML = db + " Table";
+            });
+        }
 
         function fetchJSONFile(path, callback) {
             var httpRequest = new XMLHttpRequest();
@@ -51,19 +82,17 @@
             httpRequest.open('GET', path);
             httpRequest.send(); 
         }
+    
+        function populateTables() {
 
-        // this requests the file and executes a callback with the parsed result once
-        //   it is available
-        fetchJSONFile('https://github.com/nikola1402/dnd_stuff/blob/main/dnd_tables/madness_table.json', function(data){
-            // do something with your data
-            // console.log(data);
-            tablesJson = data;
-        });
+            var myNode = document.getElementById("tablesContainer");
+            while (myNode.firstChild) {
+                myNode.removeChild(myNode.lastChild);
+            }
 
-        const db = JSON.parse(tablesJson);
-        const _tables = document.getElementById("tablesContainer");
+            tablesJson = JSON.stringify(tablesJson);
+            db = JSON.parse(tablesJson);
 
-        function init() {
             for (var i=0; i < db.tables.length; i++) {
            
                 // Create table
@@ -156,6 +185,12 @@
         function createResultsTable() {
             
             var elResultsDiv = document.getElementById("resultsTableContainer");
+
+            var myNode = document.getElementById("resultsTableContainer");
+            while (myNode.firstChild) {
+                myNode.removeChild(myNode.lastChild);
+            }
+
             elResultsDiv.classList.add("invisible");
 
             var elResultsTable = document.createElement("table");
@@ -199,11 +234,13 @@
                 trHead.appendChild(thHead);                
             }
 
-
             tHead.appendChild(trHead);
             elResultsTable.appendChild(tHead);
             elResultsTable.appendChild(tBody);
-            elResultsDiv.append(elResultsTable);
+            var h2 = document.createElement("h2");
+            h2.innerHTML = "Your Results";
+            elResultsDiv.appendChild(h2);
+            elResultsDiv.appendChild(elResultsTable);
             var line = document.createElement("hr");
             elResultsDiv.appendChild(line);
         }
@@ -276,22 +313,21 @@
                     }
                 }
             }
+        }
 
-            function clearResultsTable() {
+        function clearResultsTable() {
                 
-                var tBody = document.getElementById("resultsBody");
+            var tBody = document.getElementById("resultsBody");
 
-                for (var i=0; i < tBody.children.length; i++) {
-                    
-                    var row = tBody.children[i];
+            for (var i=0; i < tBody.children.length; i++) {
+                
+                var row = tBody.children[i];
 
-                    var child = row.lastElementChild; 
-                    while (child) {
-                        row.removeChild(child);
-                        child = row.lastElementChild;
-                    }
+                var child = row.lastElementChild; 
+                while (child) {
+                    row.removeChild(child);
+                    child = row.lastElementChild;
                 }
-
             }
         }
 
