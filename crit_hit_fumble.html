@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Critical Hit and Fumble</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+</head>
+<body onload="init();">
+
+    <div class="container-fluid">
+
+        <div class="container" style="margin-top: 2em;">
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn btn-dark" onclick="generateResults();">Roll the Dice!</button>
+                </div>
+                <div class="col">
+                    <h2 id="rollResult" class="invisible"></h2>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        
+        <div id="resultsTableContainer">
+            <h2>Your Results</h2>
+        </div>
+
+        <div id="tablesContainer">
+        </div>
+
+    </div>
+    
+     <script>
+
+        const tablesJson = `
+            {
+                "tables" : [
+
+                
+                    {
+                        "tableName" : "weapon-hit-table",
+                        "columns" : [
+                            "d100",
+                            "Description",
+                            "Effect"
+                        ],
+                        "rows" : [
+                            {
+                                "dataMin" : "1",
+                                "dataMax" : "1",
+                                "description" : "You feel accomplished, but nothing remarkable happens.",
+                                "effect" : "Regular Critical Hit"
+                            },
+                            {
+                                "dataMin" : "2",
+                                "dataMax" : "5",
+                                "description" : "You feel it is imperative to press the advantage no matter the cost.",
+                                "effect" : "You can choose to gain advantage on all attacks against your target until the end of your next turn, but if you do all enemies have advantage on their attack rolls against you until the end of your next turn."
+                            },
+                            {
+                                "dataMin" : "6",
+                                "dataMax" : "9",
+                                "description" : "You feel it is imperative to press the advantage, but maintain awareness of your surroundings.",
+                                "effect" : "You can choose to gain advantage on all attacks against your target next turn, your target has advantage on their attack rolls against you until the end of your next turn."
+                            },
+                            {
+                                "dataMin" : "10",
+                                "dataMax" : "14",
+                                "description" : "You know how to press the advantage.",
+                                "effect" : "You gain advantage on all attacks against your target until the end of your next turn."
+                            },
+                            {
+                                "dataMin" : "15",
+                                "dataMax" : "19",
+                                "description" : "As you are fighting, you notice an effective route to escape danger.",
+                                "effect" : "You are able to use the disengage action after your attack."
+                            },
+                            {
+                                "dataMin" : "20",
+                                "dataMax" : "24",
+                                "description" : "You feel the eb and flow of the battle, and know where to make your next move.",
+                                "effect" : "After your turn you move to the top of the initiative order."
+                            },
+                            {
+                                "dataMin" : "25",
+                                "dataMax" : "29",
+                                "description" : "You begin to recognize patterns in your opponents fighting technique.",
+                                "effect" : "You gain +2 to your AC against your target, and advantage on all savings throws from effects originating from your target until your next turn."
+                            },
+                            {
+                                "dataMin" : "30",
+                                "dataMax" : "39",
+                                "description" : "You are able to maneuver towards your opponent while attacking, and attempt to harass them.",
+                                "effect" : "After your attack you can choose to attempt to grapple your opponent if you have a free hand, or attempt to shove your opponent if both hands are in use."
+                            },
+                            {
+                                "dataMin" : "40",
+                                "dataMax" : "49",
+                                "description" : "You are able to maneuver towards your opponent while attacking and harass them.",
+                                "effect" : "After your attack you can choose to automatically succeed in grappling your opponent if you have a free hand, or shoving your opponent if both hands are in use."
+                            },
+                            {
+                                "dataMin" : "50",
+                                "dataMax" : "59",
+                                "description" : "You attempt to disarm your opponent.",
+                                "effect" : "You are able to take the disarm action after your attack"
+                            },
+                            {
+                                "dataMin" : "60",
+                                "dataMax" : "69",
+                                "description" : "You kick your target’s weapon out of their hands.",
+                                "effect" : "You are able to take the disarm action after your attack, and can steal your opponents weapon if you have a free hand. Otherwise you can knock it up to 20 feet away."
+                            },
+                            {
+                                "dataMin" : "70",
+                                "dataMax" : "74",
+                                "description" : "Your senses heighten and you become aware of threats around the battlefield.",
+                                "effect" : "You are able to use the dodge action after your attack."
+                            },
+                            {
+                                "dataMin" : "75",
+                                "dataMax" : "79",
+                                "description" : "Your attack knocks your target over.",
+                                "effect" : "Your target is knocked prone."
+                            },
+                            {
+                                "dataMin" : "80",
+                                "dataMax" : "84",
+                                "description" : "Your strike surprises your opponent.",
+                                "effect" : "Your target is surprised until the end of their next turn."
+                            },
+                            {
+                                "dataMin" : "85",
+                                "dataMax" : "89",
+                                "description" : "You strike with great force.",
+                                "effect" : "Roll an additional set of damage dice above and beyond your normal critical roll."
+                            },
+                            {
+                                "dataMin" : "90",
+                                "dataMax" : "94",
+                                "description" : "You strike with extreme force.",
+                                "effect" : "Roll an additional set of damage dice above and beyond your normal critical roll, and the target suffers one unit of exhaustion."
+                            },
+                            {
+                                "dataMin" : "95",
+                                "dataMax" : "99",
+                                "description" : "You strike with debilitating force.",
+                                "effect" : "Roll an additional set of damage dice above and beyond your normal critical roll, and the target suffers a permanent injury chosen by the DM. The permanent injury can be healed with extended rest of a length determined by the DM, but the attack leaves a scar."
+                            },
+                            {
+                                "dataMin" : "100",
+                                "dataMax" : "100",
+                                "description" : "You strike with devastating force.",
+                                "effect" : "Roll an additional set of damage dice above and beyond your normal critical roll, and the target suffers 1 unit of exhaustion, and the target suffers a permanent injury chosen by the DM. The permanent injury can be healed with extended rest of a length determined by the DM, but the attack leaves a scar."
+                            }
+                        ]
+                    },
+                    {
+                        "tableName" : "weapon-fumble-table",
+                        "columns" : [
+                            "d100",
+                            "Description",
+                            "Effect"
+                        ],
+                        "rows" : [
+                            {
+                                "dataMin" : "1",
+                                "dataMax" : "1",
+                                "description" : "You are embarassed by your poor showing, but nothing remarkable happens.",
+                                "effect" : "You miss your attack."
+                            },
+                            {
+                                "dataMin" : "2",
+                                "dataMax" : "5",
+                                "description" : "You lose your combat footing, exposing yourself to your target.",
+                                "effect" : "Your target has advantage on their first attack roll against you next round."
+                            },
+                            {
+                                "dataMin" : "6",
+                                "dataMax" : "9",
+                                "description" : "You lose your combat footing, exposing yourself to your enemies.",
+                                "effect" : "Your enemies have advantage on their first attack roll against you next round."
+                            },
+                            {
+                                "dataMin" : "10",
+                                "dataMax" : "14",
+                                "description" : "You lose your combat footing, and have difficulty recovering.",
+                                "effect" : "Your enemies have advantage on their attack rolls against you until the end of your next turn."
+                            },
+                            {
+                                "dataMin" : "15",
+                                "dataMax" : "19",
+                                "description" : "Melee: You get tangled with your enemy and fall over. Ranged: You spill your quiver.",
+                                "effect" : "Melee: You are knocked prone and your movement is reduced to 0. Your target must succeed a DC 10 dexterity check or they are also knocked prone. Ranged: You must pick up arrows individually from the ground using your “environmental interaction”, or the “Use an Object” action to nock your bow."
+                            },
+                            {
+                                "dataMin" : "20",
+                                "dataMax" : "29",
+                                "description" : "You lose your balance while attacking.",
+                                "effect" : "You fall prone and your movement is reduced to 0."
+                            },
+                            {
+                                "dataMin" : "30",
+                                "dataMax" : "39",
+                                "description" : "As you attack your opponent you begin to fear that they are the superior combatant.",
+                                "effect" : "Disadvantage on your next attack roll against your target."
+                            },
+                            {
+                                "dataMin" : "40",
+                                "dataMax" : "49",
+                                "description" : "You miss an attack and gaze upon the chaos of the battle, causing your confidence to falter.",
+                                "effect" : "Disadvantage on your next attack roll against any target."
+                            },
+                            {
+                                "dataMin" : "50",
+                                "dataMax" : "59",
+                                "description" : "You lose your grip as you attack.",
+                                "effect" : "Roll a DC 10 Dexterity Check, on failure you drop your weapon at your feet."
+                            },
+                            {
+                                "dataMin" : "60",
+                                "dataMax" : "69",
+                                "description" : "Melee: The weapon slips from your hand as you attack. Ranged: Your ammunition gets lodged in its container.",
+                                "effect" : "Melee: Roll a DC 10 Dexterity Check, on failure you throw your weapon into your enemy’s space. DM determines where the item is thrown on large sized or greater creatures. Ranged: You must use an action to organize the ammunition in its case before you can make another ranged attack."
+                            },
+                            {
+                                "dataMin" : "70",
+                                "dataMax" : "79",
+                                "description" : "Melee: You lunge past an enemy exposing yourself to his attack. Ranged: Your missile startles your allies near your target.",
+                                "effect" : "Melee: Enemy you were attacking is able to use their reaction to perform and attack of opportunity. Ranged: the target can perform an opportunity attack on any ally within melee range."
+                            },
+                            {
+                                "dataMin" : "80",
+                                "dataMax" : "84",
+                                "description" : "Missing what you thought was a critical blow causes you to panic.",
+                                "effect" : "End your current turn and you are surprised until the end of your next turn."
+                            },
+                            {
+                                "dataMin" : "85",
+                                "dataMax" : "89",
+                                "description" : "You attack wildly and lose track of the fight around you.",
+                                "effect" : "End your turn and move to the bottom of the initiative order at the start of the next round."
+                            },
+                            {
+                                "dataMin" : "90",
+                                "dataMax" : "94",
+                                "description" : "You lose your footing while attacking and fall to the ground bumping your head.",
+                                "effect" : "You fall prone. Roll a DC 10 constitution save, on failure you take 1d6 damage and are knocked unconscious for 1 minute or until you receive damage from any source. On success take half damage and you remain conscious."
+                            },
+                            {
+                                "dataMin" : "95",
+                                "dataMax" : "99",
+                                "description" : "You lose your footing while attacking and fall head first.",
+                                "effect" : "You fall prone. Roll a DC 15 constitution save, on failure you take 2d6 damage and are knocked unconscious for 1 minute or until you receive damage from any source. On success take half damage and you remain conscious."
+                            },
+                            {
+                                "dataMin" : "100",
+                                "dataMax" : "100",
+                                "description" : "You lose your footing while attacking and slam your head into the ground.",
+                                "effect" : "You fall prone, take 3d6 damage, and become unconscious for 1 minute or until you receive damage from any source."
+                            }
+                        ]
+                    },
+                    {
+                        "tableName" : "spell-hit-table",
+                        "columns" : [
+                            "d100",
+                            "Description",
+                            "Effect"
+                        ],
+                        "rows" : [
+                            {
+                                "dataMin" : "1",
+                                "dataMax" : "1",
+                                "description" : "You feel accomplished, but nothing remarkable happens.",
+                                "effect" : "Regular spell critical hit."
+                            },
+                            {
+                                "dataMin" : "2",
+                                "dataMax" : "5",
+                                "description" : "You feel it is imperative to press the advantage no matter the cost.",
+                                "effect" : "You can choose to gain advantage on your next attack roll against your target, but all enemies have advantage on their attack rolls against you until the end of your next turn."
+                            },
+                            {
+                                "dataMin" : "6",
+                                "dataMax" : "9",
+                                "description" : "You feel it is imperative to press the advantage, but maintain awareness of your surroundings.",
+                                "effect" : "You can choose to gain advantage on your next attack roll against your target, your target has advantage on their attack rolls against you until the end of your next turn."
+                            },
+                            {
+                                "dataMin" : "10",
+                                "dataMax" : "14",
+                                "description" : "As you are fighting, you notice an effective route to escape danger.",
+                                "effect" : "You are able to use the disengage action after your attack."
+                            },
+                            {
+                                "dataMin" : "15",
+                                "dataMax" : "19",
+                                "description" : "You feel the eb and flow of the battle, and know where to make your next move.",
+                                "effect" : "After your turn you move to the top of the initiative order."
+                            },
+                            {
+                                "dataMin" : "20",
+                                "dataMax" : "29",
+                                "description" : "Your spell cripples your opponent.",
+                                "effect" : "Your target’s movement speed is cut in half for their next 2 turns."
+                            },
+                            {
+                                "dataMin" : "30",
+                                "dataMax" : "39",
+                                "description" : "Your spell attack knocks your target over.",
+                                "effect" : "Your target is knocked prone."
+                            },
+                            {
+                                "dataMin" : "40",
+                                "dataMax" : "49",
+                                "description" : "The light from your spell flashes near your target’s eyes",
+                                "effect" : "Your target is blinded until the end of their next turn."
+                            },
+                            {
+                                "dataMin" : "50",
+                                "dataMax" : "59",
+                                "description" : "You blast the targets weapons out of their hands.",
+                                "effect" : "Your target’s weapon is flung 1d6*5 feet away in a random direction."
+                            },
+                            {
+                                "dataMin" : "60",
+                                "dataMax" : "69",
+                                "description" : "The sight of your magic fills the target’s heart with fear.",
+                                "effect" : "Your target is frightened by you until you stop casting magic. You are able to discern the source of your targets fear."
+                            },
+                            {
+                                "dataMin" : "70",
+                                "dataMax" : "74",
+                                "description" : "The force from your spell stuns your opponent.",
+                                "effect" : "Your target is incapacitated until the end of their next turn."
+                            },
+                            {
+                                "dataMin" : "75",
+                                "dataMax" : "79",
+                                "description" : "Your spell is incidentally infused with fey energy.",
+                                "effect" : "Roll 10d8. If your targets current health is lower than the number rolled they fall asleep for 1 minute."
+                            },
+                            {
+                                "dataMin" : "80",
+                                "dataMax" : "84",
+                                "description" : "Your spells strike surprises your opponent.",
+                                "effect" : "Your target is surprised until the end of their next turn."
+                            },
+                            {
+                                "dataMin" : "85",
+                                "dataMax" : "89",
+                                "description" : "Your spell strikes with great force.",
+                                "effect" : "Roll an additional set of spell damage dice above and beyond your normal critical roll."
+                            },
+                            {
+                                "dataMin" : "90",
+                                "dataMax" : "94",
+                                "description" : "Your spell strikes with extreme force.",
+                                "effect" : "Roll an additional set of spell damage dice above and beyond your normal critical roll, and the target suffers one unit of exhaustion."
+                            },
+                            {
+                                "dataMin" : "95",
+                                "dataMax" : "99",
+                                "description" : "Your spell strikes with debilitating force.",
+                                "effect" : "Roll an additional set of spell damage dice above and beyond your normal critical roll, and the target suffers a permanent injury chose by the DM. The permanent injury can be healed with extended rest of a length determined by the DM, but the attack leaves a scar."
+                            },
+                            {
+                                "dataMin" : "100",
+                                "dataMax" : "100",
+                                "description" : "Your spell strikes with devastating force.",
+                                "effect" : "Roll an additional set of spell damage dice above and beyond your normal critical roll, and the target suffers 1 unit of exhaustion, and the target suffers a permanent injury chose by the DM. The permanent injury can be healed with extended rest of a length determined by the DM, but the attack leaves a scar."
+                            }
+                        ]
+                    },
+                    {
+                        "tableName" : "spell-fumble-table",
+                        "columns" : [
+                            "d100",
+                            "Description",
+                            "Effect"
+                        ],
+                        "rows" : [
+                            {
+                                "dataMin" : "1",
+                                "dataMax" : "1",
+                                "description" : "You are embarassed by your poor showing, but nothing remarkable happens.",
+                                "effect" : "You miss your attack."
+                            },
+                            {
+                                "dataMin" : "2",
+                                "dataMax" : "5",
+                                "description" : "You get wrapped up in your spellcasting and forget to watch your target.",
+                                "effect" : "Your target has advantage on their first attack roll against you next round."
+                            },
+                            {
+                                "dataMin" : "6",
+                                "dataMax" : "9",
+                                "description" : "You get wrapped up in your spellcasting and forget to watch your surroundings.",
+                                "effect" : "All enemies have advantage on their first attack roll against you next round."
+                            },
+                            {
+                                "dataMin" : "10",
+                                "dataMax" : "14",
+                                "description" : "You are so wrapped up in your spellcasting that you forget you are fighting a battle.",
+                                "effect" : "All enemies have advantage on their attack rolls against you until the end of your next turn."
+                            },
+                            {
+                                "dataMin" : "15",
+                                "dataMax" : "19",
+                                "description" : "Your spell creates a large plume of smoke obscuring your location.",
+                                "effect" : "The area in a 5 foot radius around your location becomes heavily obscured for 1 minute. A strong breeze can blow away the smoke in 1 round."
+                            },
+                            {
+                                "dataMin" : "20",
+                                "dataMax" : "29",
+                                "description" : "Your spell misfires knocking you over.",
+                                "effect" : "You are knocked prone."
+                            },
+                            {
+                                "dataMin" : "30",
+                                "dataMax" : "39",
+                                "description" : "The spell fires in an unexpected manner, causing your confidence in your abilities to falter.",
+                                "effect" : "You have disadvantage on any spell attacks, and enemies have advantage against your spell savings throws until the end of your next turn."
+                            },
+                            {
+                                "dataMin" : "40",
+                                "dataMax" : "49",
+                                "description" : "The placement of your spell startles your allies near your target, causing them to drop their guard.",
+                                "effect" : "Your target is able to use their reaction to take an attack of opportunity on one of your allies in melee range."
+                            },
+                            {
+                                "dataMin" : "50",
+                                "dataMax" : "59",
+                                "description" : "You scramble the ingredients of your component pouch or your focus becomes overloaded with magical energy and temporarily stops working.",
+                                "effect" : "You are unable to perform material components to cast spells until the end of your next turn."
+                            },
+                            {
+                                "dataMin" : "60",
+                                "dataMax" : "69",
+                                "description" : "Your arm cramps as you cast.",
+                                "effect" : "You are unable to perform somatic components to cast spells until the end of your next turn."
+                            },
+                            {
+                                "dataMin" : "70",
+                                "dataMax" : "79",
+                                "description" : "You bite your tongue as you cast.",
+                                "effect" : "You are unable to use verbal components to cast spells until the end of your next turn."
+                            },
+                            {
+                                "dataMin" : "80",
+                                "dataMax" : "84",
+                                "description" : "Your spell misfires and dazes you, causing you to lose track of the fight.",
+                                "effect" : "End your turn and move to the bottom of the initiative order at the start of the next round."
+                            },
+                            {
+                                "dataMin" : "85",
+                                "dataMax" : "89",
+                                "description" : "Your spell misfires causing you to panic.",
+                                "effect" : "End your current turn and you are surprised until the end of your next turn."
+                            },
+                            {
+                                "dataMin" : "90",
+                                "dataMax" : "94",
+                                "description" : "Your spell backfires creating a small explosion causing you to fall and bump your head.",
+                                "effect" : "You fall prone. Roll a DC 10 constitution save, on failure you take 1d6 bludeoning damage and are knocked unconscious for 1 minute or until you receive damage from any source. On success take half damage and you remain conscious."
+                            },
+                            {
+                                "dataMin" : "95",
+                                "dataMax" : "99",
+                                "description" : "Your spell backfires creating a large explosion causing you to fall and bump your head.",
+                                "effect" : "You fall prone. Roll a DC 15 constitution save, on failure you take 1d6 bludgeoning damage, 1d6 thunder damage, and are knocked unconscious for 1 minute or until you receive damage from any source. On success take half damage and you remain conscious."
+                            },
+                            {
+                                "dataMin" : "100",
+                                "dataMax" : "100",
+                                "description" : "Your spell completely backfires creating a large explosion causing you to fall and bump your head.",
+                                "effect" : "You hit yourself with your spell. If the spell effect is instant you take the full effect. If the spell requires concentration the effect persists until the end of your next turn. You also fall prone, take 1d6 bludgeoning damage, 1d6 thunder damage, and become unconscious for 1 minute or until you receive damage from any source."
+                            }
+                        ]
+                    }
+                ]
+            }
+        `;
+
+        const db = JSON.parse(tablesJson);
+        const _tables = document.getElementById("tablesContainer");
+
+        function init() {
+            for (var i=0; i < db.tables.length; i++) {
+           
+                // Create table
+                var table = document.createElement("table");
+                table.classList.add("table");
+                table.classList.add("table-striped");
+                var idAttr = document.createAttribute("id");
+                idAttr.value = db.tables[i].tableName;
+                table.setAttributeNode(idAttr);
+
+                // Create header
+                var style;
+                var tHead = document.createElement("thead");
+                var tr = document.createElement("tr");
+                var th = document.createElement("th");
+                th.innerHTML = "d100";
+                style = document.createAttribute("style");
+                style.value = "width: 10%;";
+                th.setAttributeNode(style);
+                tr.appendChild(th);
+
+                for (var j=1; j < db.tables[i].columns.length; j++) {
+                    th = document.createElement("th");
+                    th.innerHTML = db.tables[i].columns[j];
+                    tr.appendChild(th);
+                }
+
+                tHead.appendChild(tr);
+                table.appendChild(tHead);
+
+                // Create body
+                var tBody = document.createElement("tbody");
+                var tBodyId = document.createAttribute("id");
+                tBodyId.value = db.tables[i].tableName + "-body";
+                tBody.setAttributeNode(tBodyId);
+
+                // Create rows for body
+
+                var dataMin;
+                var dataMax;
+                var scope;
+                var td;
+
+                for (var j=0; j < db.tables[i].rows.length; j++) {
+                    tr = document.createElement("tr");
+                    th = document.createElement("th");
+                    scope = document.createAttribute("scope");
+                    scope.value = "row";
+                    dataMin = document.createAttribute("data-min");
+                    dataMin.value = db.tables[i].rows[j].dataMin;
+                    dataMax = document.createAttribute("data-max");
+                    dataMax.value = db.tables[i].rows[j].dataMax;
+                    th.setAttributeNode(scope);
+                    th.setAttributeNode(dataMin);
+                    th.setAttributeNode(dataMax);
+
+                    if (dataMin.value !== dataMax.value) {
+                        th.innerHTML = dataMin.value + " - " + dataMax.value;
+                    } else {
+                        th.innerHTML = dataMin.value;
+                    }
+
+                    tr.appendChild(th);
+
+                    var row = db.tables[i].rows[j];
+
+                    Object.keys(row).forEach(function(key) {
+                        if (key === "dataMin" || key === "dataMax") {
+                            return;
+                        }
+
+                        td = document.createElement("td");
+                        td.innerHTML = row[key];
+                        tr.appendChild(td);
+                    });
+
+                    tBody.append(tr);
+                    table.appendChild(tBody);
+                }
+
+                var tableName = document.createElement("h2");
+                tableName.innerHTML = db.tables[i].tableName;
+                _tables.appendChild(tableName);
+                _tables.appendChild(table);
+            }
+
+            createResultsTable();
+        };
+
+        function createResultsTable() {
+            
+            var elResultsDiv = document.getElementById("resultsTableContainer");
+            elResultsDiv.classList.add("invisible");
+
+            var elResultsTable = document.createElement("table");
+            elResultsTable.classList.add("table");
+            elResultsTable.classList.add("table-striped");
+
+            var tHead = document.createElement("thead");
+            var tBody = document.createElement("tbody");
+
+            var attr = document.createAttribute("id");
+            attr.value = "resultsBody";
+            tBody.setAttributeNode(attr);
+
+            // Create tbody with as many rows as there are tables in JSON db
+            var trBody,
+                trRow;
+
+            for (var i=0; i < db.tables.length; i++) {
+                trRow = document.createElement("tr");
+                attr = document.createAttribute("id");
+                attr.value = db.tables[i].tableName + "-result";
+                trRow.setAttributeNode(attr);
+                tBody.appendChild(trRow);
+            }
+
+            // Create thead with as many columns as there are values in 'columns' array from JSON db
+            var trHead = document.createElement("tr");
+            var thHead = document.createElement("th");
+            attr = document.createAttribute("scope");
+            attr.value = "col";
+            thHead.setAttributeNode(attr);
+            thHead.innerHTML = "Table";
+            trHead.appendChild(thHead);
+
+            for (var i=1; i < db.tables[0].columns.length; i++) {
+                thHead = document.createElement("th");
+                attr = document.createAttribute("scope");
+                attr.value = "col";
+                thHead.setAttributeNode(attr);
+                thHead.innerHTML = db.tables[0].columns[i];
+                trHead.appendChild(thHead);                
+            }
+
+
+            tHead.appendChild(trHead);
+            elResultsTable.appendChild(tHead);
+            elResultsTable.appendChild(tBody);
+            elResultsDiv.append(elResultsTable);
+            var line = document.createElement("hr");
+            elResultsDiv.appendChild(line);
+        }
+
+        function generateResults() {
+
+            // Show the result of dice roll
+            var elResult = document.getElementById("rollResult");
+            var elTable = document.getElementById("resultsTableContainer");
+
+            elResult.textContent = ""
+            var rolledNumber = Math.floor(Math.random() * 100) + 1;
+            var text = "You have rolled ";
+            elResult.textContent = text + rolledNumber;
+
+            populateResultsTable(rolledNumber);
+
+            if (elResult.classList.contains("invisible")) {
+                elResult.classList.toggle("invisible");
+            }
+
+            if (elTable.classList.contains("invisible")) {
+                elTable.classList.toggle("invisible");
+            }
+        }
+
+        function populateResultsTable(rolledNumber) {
+
+            clearResultsTable();
+
+            var tableName,
+                resultId,
+                dbRow,
+                tableRow,
+                dataMin,
+                dataMax,
+                td;
+
+            for (var i=0; i < db.tables.length; i++) {
+                
+                tableName = db.tables[i].tableName;
+
+                resultId = db.tables[i].tableName + "-result";
+                dbRow = db.tables[i].row
+
+                tableRow = document.getElementById(resultId);
+                td = document.createElement("td");
+                td.innerHTML = tableName.replace("-table", "");
+                tableRow.appendChild(td);
+
+                for (var j=0; j < db.tables[i].rows.length; j++) {
+
+                    dbRow = db.tables[i].rows[j];
+
+                    dataMin = dbRow.dataMin;
+                    dataMax = dbRow.dataMax;
+
+                    if (dbRow.dataMin <= rolledNumber && rolledNumber <= dbRow.dataMax) {
+                        
+                        Object.keys(dbRow).forEach(function(key) {
+
+                            if (key === "dataMin" || key === "dataMax") {
+                                return;
+                            }
+
+                            td = document.createElement("td");
+                            td.innerHTML = dbRow[key];
+                            tableRow.appendChild(td);
+                        });
+                    }
+                }
+            }
+
+            function clearResultsTable() {
+                
+                var tBody = document.getElementById("resultsBody");
+
+                for (var i=0; i < tBody.children.length; i++) {
+                    
+                    var row = tBody.children[i];
+
+                    var child = row.lastElementChild; 
+                    while (child) {
+                        row.removeChild(child);
+                        child = row.lastElementChild;
+                    }
+                }
+
+            }
+        }
+
+    </script>
+</body>
+</html>

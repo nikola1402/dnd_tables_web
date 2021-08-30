@@ -1,0 +1,238 @@
+{
+    "tables" : [
+        {
+            "tableName" : "short-madness-table",
+            "columns" : [
+                "d100",
+                "Duration",
+                "Effect"
+            ],
+            "rows" : [
+                {
+                    "dataMin" : "1",
+                    "dataMax" : "20",
+                    "duration" : "1d10 minutes",
+                    "effect" : "The character retreats into his or her mind and becomes Paralyzed. The Effect ends if the character takes any damage."
+                },
+                {
+                    "dataMin" : "21",
+                    "dataMax" : "30",
+                    "duration" : "1d10 minutes",
+                    "effect" : "The character becomes Incapacitated and spends the Duration screaming, laughing, or weeping."
+                },
+                {
+                    "dataMin" : "31",
+                    "dataMax" : "40",
+                    "duration" : "1d10 minutes",
+                    "effect" : "The character becomes Frightened and must use his or her action and Movement each round to flee from the source of the fear."
+                },
+                {
+                    "dataMin" : "41",
+                    "dataMax" : "50",
+                    "duration" : "1d10 minutes",
+                    "effect" : "The character begins babbling and is incapable of normal Speech or Spellcasting."
+                },
+                {
+                    "dataMin" : "51",
+                    "dataMax" : "60",
+                    "duration" : "1d10 minutes",
+                    "effect" : "The character must use his or her action each round to Attack the nearest creature."
+                },
+                {
+                    "dataMin" : "61",
+                    "dataMax" : "70",
+                    "duration" : "1d10 minutes",
+                    "effect" : "The character experiences vivid hallucinations and has disadvantage on Ability Checks."
+                },
+                {
+                    "dataMin" : "71",
+                    "dataMax" : "75",
+                    "duration" : "1d10 minutes",
+                    "effect" : "The character does whatever anyone tells him or her to do that isn’t obviously self-­ destructive."
+                },
+                {
+                    "dataMin" : "76",
+                    "dataMax" : "80",
+                    "duration" : "1d10 minutes",
+                    "effect" : "The character experiences an overpowering urge to eat something strange such as dirt, slime, or offal."
+                },
+                {
+                    "dataMin" : "81",
+                    "dataMax" : "90",
+                    "duration" : "1d10 minutes",
+                    "effect" : "The character is Stunned."
+                },
+                {
+                    "dataMin" : "91",
+                    "dataMax" : "100",
+                    "duration" : "1d10 minutes",
+                    "effect" : "The character falls Unconscious."
+                }
+            ]
+        },
+        {
+            "tableName" : "long-madness-table",
+            "columns" : [
+                "d100",
+                "Duration",
+                "Effect"
+            ],
+            "rows" : [
+                {
+                    "dataMin" : "1",
+                    "dataMax" : "10",
+                    "duration" : "1d10 x 10 hours",
+                    "effect" : "The character feels compelled to repeat a specific activity over and over, such as washing hands, touching things, praying, or counting coins."
+                },
+                {
+                    "dataMin" : "11",
+                    "dataMax" : "20",
+                    "duration" : "1d10 x 10 hours",
+                    "effect" : "The character experiences vivid hallucinations and has disadvantage on Ability Checks."
+                },
+                {
+                    "dataMin" : "21",
+                    "dataMax" : "30",
+                    "duration" : "1d10 x 10 hours",
+                    "effect" : "The character suffers extreme paranoia. The character has disadvantage on Wisdom and Charisma checks."
+                },
+                {
+                    "dataMin" : "31",
+                    "dataMax" : "40",
+                    "duration" : "1d10 x 10 hours",
+                    "effect" : "The character regards something (usually the source of madness) with intense revulsion, as if affected by the antipathy Effect of the Antipathy/Sympathy spell."
+                },
+                {
+                    "dataMin" : "41",
+                    "dataMax" : "45",
+                    "duration" : "1d10 x 10 hours",
+                    "effect" : "The character experiences a powerful delusion. Choose a potion. The character imagines that he or she is under its Effects."
+                },
+                {
+                    "dataMin" : "46",
+                    "dataMax" : "55",
+                    "duration" : "1d10 x 10 hours",
+                    "effect" : "The character becomes attached to a “lucky charm,” such as a person or an object, and has disadvantage on Attack rolls, Ability Checks, and Saving Throws while more than 30 feet from it."
+                },
+                {
+                    "dataMin" : "56",
+                    "dataMax" : "65",
+                    "duration" : "1d10 x 10 hours",
+                    "effect" : "The character is Blinded (25%) or Deafened (75%)."
+                },
+                {
+                    "dataMin" : "66",
+                    "dataMax" : "75",
+                    "duration" : "1d10 x 10 hours",
+                    "effect" : "The character experiences uncontrollable tremors or tics, which impose disadvantage on Attack rolls, Ability Checks, and Saving Throws that involve Strength or Dexterity."
+                },
+                {
+                    "dataMin" : "76",
+                    "dataMax" : "85",
+                    "duration" : "1d10 x 10 hours",
+                    "effect" : "The character suffers from partial amnesia. The character knows who he or she is and retains racial Traits and Class Features, but doesn’t recognize other people or remember anything that happened before the madness took Effect."
+                },
+                {
+                    "dataMin" : "86",
+                    "dataMax" : "90",
+                    "duration" : "1d10 x 10 hours",
+                    "effect" : "Whenever the character takes damage, he or she must succeed on a DC 15 Wisdom saving throw or be affected as though he or she failed a saving throw against the Confusion spell. The Confusion Effect lasts for 1 minute."
+                },
+                {
+                    "dataMin" : "91",
+                    "dataMax" : "95",
+                    "duration" : "1d10 x 10 hours",
+                    "effect" : "The character loses the ability to speak."
+                },
+                {
+                    "dataMin" : "96",
+                    "dataMax" : "100",
+                    "duration" : "1d10 x 10 hours",
+                    "effect" : "The character falls Unconscious. No amount of jostling or damage can wake the character."
+                }
+            ]
+        },
+        {
+            "tableName" : "indefinite-madness-table",
+            "columns" : [
+                "d100",
+                "Duration",
+                "Effect"
+            ],
+            "rows" : [
+                {
+                    "dataMin" : "1",
+                    "dataMax" : "15",
+                    "duration" : "Until Cured",
+                    "effect" : "“Being drunk keeps me sane.”"
+                },
+                {
+                    "dataMin" : "16",
+                    "dataMax" : "25",
+                    "duration" : "Until Cured",
+                    "effect" : "“I keep whatever I find.”"
+                },
+                {
+                    "dataMin" : "26",
+                    "dataMax" : "30",
+                    "duration" : "Until Cured",
+                    "effect" : "“I try to become more like someone else I know—adopting his or her style of dress, mannerisms, and name.”"
+                },
+                {
+                    "dataMin" : "31",
+                    "dataMax" : "35",
+                    "duration" : "Until Cured",
+                    "effect" : "“I must bend the truth, exaggerate, or outright lie to be interesting to other people.”"
+                },
+                {
+                    "dataMin" : "36",
+                    "dataMax" : "45",
+                    "duration" : "Until Cured",
+                    "effect" : "“Achieving my goal is the only thing of interest to me, and I’ll ignore everything else to pursue it.”"
+                },
+                {
+                    "dataMin" : "46",
+                    "dataMax" : "50",
+                    "duration" : "Until Cured",
+                    "effect" : "“I find it hard to care about anything that goes on around me.”"
+                },
+                {
+                    "dataMin" : "51",
+                    "dataMax" : "55",
+                    "duration" : "Until Cured",
+                    "effect" : "“I don’t like the way people judge me all the time.”"
+                },
+                {
+                    "dataMin" : "56",
+                    "dataMax" : "70",
+                    "duration" : "Until Cured",
+                    "effect" : "“I am the smartest, wisest, strongest, fastest, and most beautiful person I know.”"
+                },
+                {
+                    "dataMin" : "71",
+                    "dataMax" : "80",
+                    "duration" : "Until Cured",
+                    "effect" : "“I am convinced that powerful enemies are hunting me, and their agents are everywhere I go. I am sure they’re watching me all the time.”"
+                },
+                {
+                    "dataMin" : "81",
+                    "dataMax" : "85",
+                    "duration" : "Until Cured",
+                    "effect" : "“There’s only one person I can trust. And only I can see this Special friend.”"
+                },
+                {
+                    "dataMin" : "86",
+                    "dataMax" : "95",
+                    "duration" : "Until Cured",
+                    "effect" : "“I can’t take anything seriously. The more serious the situation, the funnier I find it.”"
+                },
+                {
+                    "dataMin" : "96",
+                    "dataMax" : "100",
+                    "duration" : "Until Cured",
+                    "effect" : "“I’ve discovered that I really like killing people.”"
+                }
+            ]
+        }
+    ]
+}

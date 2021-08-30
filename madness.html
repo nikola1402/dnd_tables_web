@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madness</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="container" style="margin-top: 2em;">
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn btn-dark" onclick="diceRoll()">Roll the Dice!</button>
+                </div>
+                <div class="col">
+                    <h2 id="rollResult" class="invisible"></h2>
+                </div>
+            </div>
+        </div>
+
+        <table id="resultsTable" class="table table-striped invisible">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" style="width: 10%;">Level</th>
+                    <th scope="col" style="width: 10%;">Duration</th>
+                    <th scope="col">Effect</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Short Term</td>
+                    <td>1d10 Minutes</td>
+                    <td id="short-term-result"></td>
+                </tr>
+                <tr>
+                    <td>Long Term</td>
+                    <td>1d10 * 10 Hours</td>
+                    <td id="long-term-result"></td>
+                </tr>
+                <tr>
+                    <td>Indefinite</td>
+                    <td>Until Cured</td>
+                    <td id="indefinite-result"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table id="short-term-table" class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" style="width: 10%;">d100</th>
+                    <th scope="col">Effect (lasts 1d10 minutes)</th>
+                </tr>
+            </thead>
+            <tbody id="short-term-table-body">
+                <tr>
+                    <th scope="row" data-min="01" data-max="20">01 - 20</th>
+                    <td>The character retreats into his or her mind and becomes Paralyzed. The Effect ends if the character takes any damage.</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="21" data-max="30">21 - 30</th>
+                    <td>The character becomes Incapacitated and spends the Duration screaming, laughing, or weeping.</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="31" data-max="40">31 - 40</th>
+                    <td>The character becomes Frightened and must use his or her action and Movement each round to flee from the source of the fear.</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="41" data-max="50">41 - 50</th>
+                    <td>The character begins babbling and is incapable of normal Speech or Spellcasting.</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="51" data-max="60">51 - 60</th>
+                    <td>The character must use his or her action each round to Attack the nearest creature.</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="61" data-max="70">61 - 70</th>
+                    <td>The character experiences vivid hallucinations and has disadvantage on Ability Checks.</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="71" data-max="75">71 - 75</th>
+                    <td>The character does whatever anyone tells him or her to do that isn’t obviously self-­ destructive.</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="76" data-max="80">76 - 80</th>
+                    <td>The character experiences an overpowering urge to eat something strange such as dirt, slime, or offal.</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="81" data-max="90">81 - 90</th>
+                    <td>The character is Stunned.</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="91" data-max="100">91 - 100</th>
+                    <td>The character falls Unconscious.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table id="long-term-table" class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col" style="width: 10%;">d100</th>
+                    <th scope="col">Effect (lasts 1d10 x 10 hours)</th>
+                </tr>
+            </thead>
+            <tbody id="long-term-table-body">
+                <tr>
+                    <th scope="row" data-min="01" data-max="10">01 - 10</th>
+                    <td>The character feels compelled to repeat a specific activity over and over, such as washing hands, touching things, praying, or counting coins.</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="11" data-max="20">11 - 20</th>
+                    <td>The character experiences vivid hallucinations and has disadvantage on Ability Checks.</td>
+                </tr>
+
+                <tr>
+                    <th scope="row" data-min="21"data-max="30">21 - 30</th>
+                    <td>The character suffers extreme paranoia. The character has disadvantage on Wisdom and Charisma checks.</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="31" data-max="40">31 - 40</th>
+                    <td>The character regards something (usually the source of madness) with intense revulsion, as if affected by the antipathy Effect of the Antipathy/Sympathy spell.</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="41" data-max="45">41 - 45</th>
+                    <td>The character experiences a powerful delusion. Choose a potion. The character imagines that he or she is under its Effects.</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="46" data-max="55">46 - 55</th>
+                    <td>The character becomes attached to a “lucky charm,” such as a person or an object, and has disadvantage on Attack rolls, Ability Checks, and Saving Throws while more than 30 feet from it.</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="56" data-max="65">56 - 65</th>
+                    <td>The character is Blinded (25%) or Deafened (75%).</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="66" data-max="75">66 - 75</th>
+                    <td>The character experiences uncontrollable tremors or tics, which impose disadvantage on Attack rolls, Ability Checks, and Saving Throws that involve Strength or Dexterity.</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="76" data-max="85">76 - 85</th>
+                    <td>The character suffers from partial amnesia. The character knows who he or she is and retains racial Traits and Class Features, but doesn’t recognize other people or remember anything that happened before the madness took Effect.</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="86" data-max="90">86 - 90</th>
+                    <td>Whenever the character takes damage, he or she must succeed on a DC 15 Wisdom saving throw or be affected as though he or she failed a saving throw against the Confusion spell. The Confusion Effect lasts for 1 minute.</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="91" data-max="95">91- 95</th>
+                    <td>The character loses the ability to speak.</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="96" data-max="100">96 - 100</th>
+                    <td>The character falls Unconscious. No amount of jostling or damage can wake the character.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table id="indefinite-table" class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col" style="width: 10%">d100</th>
+                    <th scope="col">Effect (lasts until cured)</th>
+                </tr>
+            </thead>
+            <tbody id="indefinite-table-body">
+                <tr>
+                    <th scope="row" data-min="01" data-max="15">01 - 15</th>
+                    <td>“Being drunk keeps me sane.”</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="16" data-max="25">16 - 25</th>
+                    <td>"I keep whatever I find."</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="26" data-max="30">26 - 30</th>
+                    <td>“I try to become more like someone else I know—adopting his or her style of dress, mannerisms, and name.”</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="31" data-max="35">31 - 35</th>
+                    <td>“I must bend the truth, exaggerate, or outright lie to be interesting to other people.”</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="36" data-max="45">36 - 45</th>
+                    <td>“Achieving my goal is the only thing of interest to me, and I’ll ignore everything else to pursue it.”</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="46" data-max="50">46 - 50</th>
+                    <td>“I find it hard to care about anything that goes on around me.”</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="51" data-max="55">51 - 55</th>
+                    <td>“I don’t like the way people judge me all the time.”</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="56" data-max="70">56 - 70</th>
+                    <td>“I am the smartest, wisest, strongest, fastest, and most beautiful person I know.”</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="71" data-max="80">71 - 80</th>
+                    <td>“I am convinced that powerful enemies are hunting me, and their agents are everywhere I go. I am sure they’re watching me all the time.”</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="81" data-max="85">81 - 85</th>
+                    <td>“There’s only one person I can trust. And only I can see this Special friend.”</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="86" data-max="95">86 - 95</th>
+                    <td>“I can’t take anything seriously. The more serious the situation, the funnier I find it.”</td>
+                </tr>
+                <tr>
+                    <th scope="row" data-min="96" data-max="100">96 - 100</th>
+                    <td>“I’ve discovered that I really like killing people.”</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <script>
+
+        function diceRoll() {
+
+            // Show the result of dice roll
+            var elResult = document.getElementById("rollResult");
+            
+            elResult.textContent = ""
+            var number = Math.floor(Math.random() * 100) + 1;
+            var text = "You have rolled ";
+            elResult.textContent = text + number;
+
+            if (elResult.classList.contains("invisible")) {
+                elResult.classList.toggle("invisible");
+            }
+
+            // Populate table with corresponding results from other tables
+            var elResultsTable = document.getElementById("resultsTable");
+
+            var temp;
+            var lower;
+            var higher;
+            var children;
+            var rows;
+
+            getResultRow("short");
+            getResultRow("long");
+            getResultRow("indefinite");
+
+            if (elResultsTable.classList.contains("invisible")) {
+                elResultsTable.classList.toggle("invisible");
+            }
+
+
+            function getResultRow(level) {
+
+                if (level.includes("short")) {
+                    bodyChildren = document.getElementById("short-term-table-body").children;
+                } else if (level.includes("long")) {
+                    bodyChildren = document.getElementById("long-term-table-body").children;
+                } else {
+                    bodyChildren = document.getElementById("indefinite-table-body").children;
+                }
+
+                for (var i=0; i < bodyChildren.length; i++) {
+
+                    rows = bodyChildren[i].children;
+
+                    for (var j=0; j < rows.length; j++) {
+                        lower = rows[j].dataset.min;
+                        higher = rows[j].dataset.max;
+
+                        if (number >= lower && number <= higher) {
+                            if (level.includes("short")) {
+                                document.getElementById("short-term-result").textContent = rows[j+1].textContent;
+                            } else if (level.includes("long")) {
+                                document.getElementById("long-term-result").textContent = rows[j+1].textContent;
+                            } else {
+                                document.getElementById("indefinite-result").textContent = rows[j+1].textContent;
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+    </script>
+    
+</body>
+</html>
