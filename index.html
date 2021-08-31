@@ -17,7 +17,7 @@
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        <h3 class="position-absolute top-50 start-50 translate-middle"">Tables</h3>
+                        <h3 class="position-absolute top-50 start-50 translate-middle""><strong>Tables</strong></h3>
                     </button>
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -35,12 +35,14 @@
 
         <div class="container" style="margin-top: 2em;">
             <div class="row" style="margin-top: 2em;">
+                <div class="col"></div>
                 <div class="col">
                     <button type="button" class="btn btn-dark" onclick="generateResults();">Roll the Dice!</button>
                 </div>
                 <div class="col">
                     <h2 id="rollResult" class="invisible"></h2>
                 </div>
+                <div class="col"></div>
             </div>
         </div>
 
@@ -188,7 +190,7 @@
                 }
 
                 var elTableNameP = document.createElement("h2");
-                elTableNameP.classList.add("pt-5");
+                elTableNameP.classList.add("pt-4");
                 var elTableNameStr = document.createElement("strong");
                 var tableName = db.tables[i].tableName;
                 elTableNameStr.innerHTML = tableName.replaceAll("-", " ");
@@ -203,6 +205,7 @@
         function createResultsTable() {
             
             var elResultsDiv = document.getElementById("resultsTableContainer");
+            elResultsDiv.classList.add("pt-4");
 
             var myNode = document.getElementById("resultsTableContainer");
             while (myNode.firstChild) {
