@@ -1,0 +1,93 @@
+{
+    "tables" : [
+        {
+            "tableName" : "pocket_loot_table",
+            "columns" : [
+                "d100",
+                "Loot"
+            ],
+            "rows" : [
+                {
+                    "dataMin" : "",
+                    "dataMax" : "",
+                    "loot" : "A scrap of paper or parchment with an unintelligible note scribbled on it."
+                },
+                {
+                    "dataMin" : "",
+                    "dataMax" : "",
+                    "loot" : "A scrap of paper or parchment with a list of mundane items or tasks written on it."
+                },
+                {
+                    "dataMin" : "",
+                    "dataMax" : "",
+                    "loot" : "Some lint or a bit of thread."
+                },
+                {
+                    "dataMin" : "An errant button or broken piece of something.",
+                    "dataMax" : "",
+                    "loot" : ""
+                },
+                {
+                    "dataMin" : "",
+                    "dataMax" : "",
+                    "loot" : "Small brass key."
+                },
+                {
+                    "dataMin" : "",
+                    "dataMax" : "",
+                    "loot" : "Large brass key."
+                },
+                {
+                    "dataMin" : "",
+                    "dataMax" : "",
+                    "loot" : "Heavy iron key"
+                },
+                {
+                    "dataMin" : "",
+                    "dataMax" : "",
+                    "loot" : "Wooden key"
+                },
+                {
+                    "dataMin" : "",
+                    "dataMax" : "",
+                    "loot" : "Bone key"
+                },
+                {
+                    "dataMin" : "",
+                    "dataMax" : "",
+                    "loot" : "Clean handkerchief."
+                },
+                {
+                    "dataMin" : "",
+                    "dataMax" : "",
+                    "loot" : "Soiled handkerchief."
+                },
+                {
+                    "dataMin" : "",
+                    "dataMax" : "",
+                    "loot" : "2d4 cp"
+                },
+                {
+                    "dataMin" : "",
+                    "dataMax" : "",
+                    "loot" : "3d6 cp"
+                },
+                {
+                    "dataMin" : "",
+                    "dataMax" : "",
+                    "loot" : "1d6 sp and 2d6 cp"
+                },
+                {
+                    "dataMin" : "",
+                    "dataMax" : "",
+                    "loot" : "1d4 gp"
+                },
+                {
+                    "dataMin" : "",
+                    "dataMax" : "",
+                    "loot" : "2d4 gp and 1d10 sp"
+                }
+            ]
+        }
+    ]
+}

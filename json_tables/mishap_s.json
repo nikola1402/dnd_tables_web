@@ -1,0 +1,264 @@
+{
+    "tables" : [
+        {
+            "tableName" : "magic-mishap-table",
+            "columns" : [
+                "d100",
+                "Effect",
+                "Description"
+            ],
+            "rows" : [
+                {
+                    "dataMin" : "1",
+                    "dataMax" : "5",
+                    "Effect" : "Befuddled",
+                    "Description" : "Your head spins, and you have trouble making sense of your surroundings. You take 1d6 psychic damage, and you have disadvantage on all Intelligence ability checks until you complete a long rest."
+                },
+                {
+                    "dataMin" : "6",
+                    "dataMax" : "10",
+                    "Effect" : "Clouded Mind",
+                    "Description" : "You have trouble thinking clearly. You have disadvantage on Intelligence and Wisdom saving throws until you complete a long rest"
+                },
+                {
+                    "dataMin" : "11",
+                    "dataMax" : "15",
+                    "Effect" : "Explosive Boom",
+                    "Description" : "The stored spell explodes with a loud bang. You take 1d6 thunder damage, and you are deafened for 1 hour."
+                },
+                {
+                    "dataMin" : "16",
+                    "dataMax" : "20",
+                    "Effect" : "Explosive Flash",
+                    "Description" : "The stored spell explodes in a bright flash. You take 1d6 radiant damage, and you are blinded for 1 hour."
+                },
+                {
+                    "dataMin" : "21",
+                    "dataMax" : "25",
+                    "Effect" : "Fiery Burst",
+                    "Description" : "The stored spell explodes in a fiery burst. You take 2d6 fire damage."
+                },
+                {
+                    "dataMin" : "26",
+                    "dataMax" : "30",
+                    "Effect" : "Forceful Burst",
+                    "Description" : "The stored spell explodes in a burst of force. You take 2d6 force damage."
+                },
+                {
+                    "dataMin" : "31",
+                    "dataMax" : "35",
+                    "Effect" : "Icy burst",
+                    "Description" : "The stored spell explodes in a burst of frost. You take 2d6 cold damage."
+                },
+                {
+                    "dataMin" : "36",
+                    "dataMax" : "40",
+                    "Effect" : "Life Drain",
+                    "Description" : "The stored spell sizzles with necrotic energy. You take 1d6 necrotic damage, and you cannot regain hit points until you complete a long rest."
+                },
+                {
+                    "dataMin" : "41",
+                    "dataMax" : "45",
+                    "Effect" : "Mad Twitching",
+                    "Description" : "You twitch erratically. You have disadvantage on Dexterity and Charisma saving throws until you complete a long rest."
+                },
+                {
+                    "dataMin" : "46",
+                    "dataMax" : "50",
+                    "Effect" : "Magical Illness",
+                    "Description" : "You feel sick to your stomach. You are poisoned for 1 hour, and you have disadvantage on Constitution and Strength saving throws until you complete a long rest."
+                },
+                {
+                    "dataMin" : "51",
+                    "dataMax" : "55",
+                    "Effect" : "Operator Spell Hazard",
+                    "Description" : "The stored spell targets you."
+                },
+                {
+                    "dataMin" : "56",
+                    "dataMax" : "60",
+                    "Effect" : "Bystander spell hazard",
+                    "Description" : "The stored spell targets a random creature within 30 ft. of you, other than yourself."
+                },
+                {
+                    "dataMin" : "61",
+                    "dataMax" : "65",
+                    "Effect" : "Spell Burst Hazard",
+                    "Description" : "The stored spell targets the you and 2d4 creatures within 30 ft. of you."
+                },
+                {
+                    "dataMin" : "66",
+                    "dataMax" : "70",
+                    "Effect" : "Empowered spell hazard",
+                    "Description" : "The stored spell targets targets a random creature within 30 ft. of you. Any damage the stored spell deals is doubled."
+                },
+                {
+                    "dataMin" : "71",
+                    "dataMax" : "75",
+                    "Effect" : "Extended Spell Hazard",
+                    "Description" : "The stored spell targets a random creature within 30 ft. of you. The duration of the spell's effect is doubled."
+                },
+                {
+                    "dataMin" : "76",
+                    "dataMax" : "80",
+                    "Effect" : "Operator Surge Hazard",
+                    "Description" : "The stored spell targets you. Roll again on this table, using a d10."
+                },
+                {
+                    "dataMin" : "81",
+                    "dataMax" : "85",
+                    "Effect" : "Bystander Surge Hazard",
+                    "Description" : "The stored spell targets a random creature within 30 ft. of you, other than yourself. Roll again on this table, using a d10. Apply that effect the creature targeted by the spell."
+                },
+                {
+                    "dataMin" : "86",
+                    "dataMax" : "90",
+                    "Effect" : "Spell Burst Surge Hazard",
+                    "Description" : "The stored spell targets you and 2d4 creatures within 30 ft. of you. Roll again on this table, using a d10. Apply that effect to each creature targeted by the spell."
+                },
+                {
+                    "dataMin" : "91",
+                    "dataMax" : "95",
+                    "Effect" : "Double Trouble Operator Hazard",
+                    "Description" : "Roll 2d4 times on this table using a d10. Apply each effect to yourself."
+                },
+                {
+                    "dataMin" : "96",
+                    "dataMax" : "100",
+                    "Effect" : "Double Trouble Bystander Hazard",
+                    "Description" : "Roll 2d4 times on this table using a d10. Apply each effect to a random creature within 30 ft. of you, other than yourself."
+                }
+            ]
+        },
+        {
+            "tableName" : "alchemical-mishap-table",
+            "columns" : [
+                "d100",
+                "Effect",
+                "Description"
+            ],
+            "rows" : [
+                {
+                    "dataMin" : "1",
+                    "dataMax" : "5",
+                    "Effect" : "Befuddled",
+                    "Description" : "Your head spins, and you have trouble making sense of your surroundings. You take 1d6 psychic damage, and you have disadvantage on all Intelligence ability checks until you finish a long rest."
+                },
+                {
+                    "dataMin" : "6",
+                    "dataMax" : "10",
+                    "Effect" : "Deathly Ill",
+                    "Description" : "You take ill, teetering uncomfortably close to death. You take 1d6 necrotic damage, and you cannot regain hit points until you finish a long rest."
+                },
+                {
+                    "dataMin" : "11",
+                    "dataMax" : "15",
+                    "Effect" : "Disoriented",
+                    "Description" : "You have trouble thinking clearly. You have disadvantage on Intelligence and Wisdom saving throws until you finish a long rest."
+                },
+                {
+                    "dataMin" : "16",
+                    "dataMax" : "20",
+                    "Effect" : "Nausea",
+                    "Description" : "You feel sick to your stomach. You have disadvantage on Constitution and Strength saving throws until you finish a long rest."
+                },
+                {
+                    "dataMin" : "21",
+                    "dataMax" : "25",
+                    "Effect" : "Dizziness",
+                    "Description" : "You feel light-headed and unsteady on your feet. You have disadvantage on all Dexterity ability checks until you finish a long rest."
+                },
+                {
+                    "dataMin" : "26",
+                    "dataMax" : "30",
+                    "Effect" : "Upset Stomach",
+                    "Description" : "You feel very queasy. You have disadvantage on all Strength ability checks until you finish a long rest."
+                },
+                {
+                    "dataMin" : "31",
+                    "dataMax" : "35",
+                    "Effect" : "Poison Exposure",
+                    "Description" : "You are exposed to toxins. You take 1d6 poison damage, and you are poisoned for 1 hour."
+                },
+                {
+                    "dataMin" : "36",
+                    "dataMax" : "40",
+                    "Effect" : "Headache",
+                    "Description" : "You develop a splitting headache. You have disadvantage on all Intelligence ability checks until you finish a long rest."
+                },
+                {
+                    "dataMin" : "41",
+                    "dataMax" : "45",
+                    "Effect" : "Skin Irritation",
+                    "Description" : "our skin breaks out in an unsightly rash. You have disadvantage on all Charisma ability checks until you finish a long rest."
+                },
+                {
+                    "dataMin" : "46",
+                    "dataMax" : "50",
+                    "Effect" : "Coughing Fits",
+                    "Description" : "You suffer fits of violent coughing. You have disadvantage on Dexterity and Charisma saving throws until you finish a long rest."
+                },
+                {
+                    "dataMin" : "51",
+                    "dataMax" : "55",
+                    "Effect" : "Euphoria",
+                    "Description" : "You feel giddy and content. You have disadvantage on all Wisdom ability checks until you finish a long rest."
+                },
+                {
+                    "dataMin" : "56",
+                    "dataMax" : "60",
+                    "Effect" : "Extreme Nausea",
+                    "Description" : "You feel so sick you can barely stay on your feet. You take 1d6 poison damage. You have disadvantage on all Strength ability checks until you finish a long rest."
+                },
+                {
+                    "dataMin" : "61",
+                    "dataMax" : "65",
+                    "Effect" : "Chills",
+                    "Description" : "You catch chills and shake uncontrollable. You take 1d6 cold damage. You have disadvantage on all Dexterity ability checks until you finish a long rest."
+                },
+                {
+                    "dataMin" : "66",
+                    "dataMax" : "70",
+                    "Effect" : "Accidental Fire",
+                    "Description" : "You are burned as your reagents catch fire. You take 2d6 fire damage."
+                },
+                {
+                    "dataMin" : "71",
+                    "dataMax" : "75",
+                    "Effect" : "Uncontrollable Fire",
+                    "Description" : "Your reagents catch fire and begin to spread to the vicinity. You take 3d6 acid damage, and each creature within 10 feet of you takes 1d6 fire damage. Flammable objects within 10 feet of you catch fire."
+                },
+                {
+                    "dataMin" : "76",
+                    "dataMax" : "80",
+                    "Effect" : "Acid Spill",
+                    "Description" : "You are splashed with a caustic substance. You take 2d6 acid damage."
+                },
+                {
+                    "dataMin" : "81",
+                    "dataMax" : "85",
+                    "Effect" : "Large Acid Spill",
+                    "Description" : "A vat of acid bubbles over violently, corroding everything in the vicinity. You take 3d6 acid damage, and each creature within 10 feet of you takes 1d6 acid damage. Objects within 10 feet of you that cannot withstand corrosion take 1d6 acid damage."
+                },
+                {
+                    "dataMin" : "86",
+                    "dataMax" : "90",
+                    "Effect" : "Explosive Boom",
+                    "Description" : "Your reagents explode with a loud bang. You take 1d6 thunder damage, and you are deafened for 1 hour."
+                },
+                {
+                    "dataMin" : "91",
+                    "dataMax" : "95",
+                    "Effect" : "Explosive Flash",
+                    "Description" : "Your reagents explode in a bright flash. You take 1d6 radiant damage, and you are blinded for 1 hour."
+                },
+                {
+                    "dataMin" : "96",
+                    "dataMax" : "100",
+                    "Effect" : "Massive Explosion",
+                    "Description" : "Your reagents explode in spectacular fashion. You take 2d6 thunder damage, 2d6 radiant damage, and you are blinded and deafened for 1 hour. Additionally, each creature within 15 feet of you takes 1d6 thunder damage and 1d6 radiant damage. Flammable objects within 15 feet of you catch fire."
+                }
+            ]
+        }
+    ]
+}
