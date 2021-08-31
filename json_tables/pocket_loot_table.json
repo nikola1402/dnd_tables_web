@@ -8,85 +8,105 @@
             ],
             "rows" : [
                 {
-                    "dataMin" : "",
-                    "dataMax" : "",
+                    "dataMin" : "1",
+                    "dataMax" : "5",
                     "loot" : "A scrap of paper or parchment with an unintelligible note scribbled on it."
                 },
                 {
-                    "dataMin" : "",
-                    "dataMax" : "",
+                    "dataMin" : "6",
+                    "dataMax" : "10",
                     "loot" : "A scrap of paper or parchment with a list of mundane items or tasks written on it."
                 },
                 {
-                    "dataMin" : "",
-                    "dataMax" : "",
+                    "dataMin" : "11",
+                    "dataMax" : "15",
                     "loot" : "Some lint or a bit of thread."
                 },
                 {
-                    "dataMin" : "An errant button or broken piece of something.",
-                    "dataMax" : "",
-                    "loot" : ""
+                    "dataMin" : "16",
+                    "dataMax" : "20",
+                    "loot" : "An errant button or broken piece of something."
                 },
                 {
-                    "dataMin" : "",
-                    "dataMax" : "",
+                    "dataMin" : "21",
+                    "dataMax" : "25",
                     "loot" : "Small brass key."
                 },
                 {
-                    "dataMin" : "",
-                    "dataMax" : "",
+                    "dataMin" : "26",
+                    "dataMax" : "30",
                     "loot" : "Large brass key."
                 },
                 {
-                    "dataMin" : "",
-                    "dataMax" : "",
+                    "dataMin" : "31",
+                    "dataMax" : "35",
                     "loot" : "Heavy iron key"
                 },
                 {
-                    "dataMin" : "",
-                    "dataMax" : "",
+                    "dataMin" : "36",
+                    "dataMax" : "40",
                     "loot" : "Wooden key"
                 },
                 {
-                    "dataMin" : "",
-                    "dataMax" : "",
+                    "dataMin" : "41",
+                    "dataMax" : "45",
                     "loot" : "Bone key"
                 },
                 {
-                    "dataMin" : "",
-                    "dataMax" : "",
+                    "dataMin" : "46",
+                    "dataMax" : "50",
                     "loot" : "Clean handkerchief."
                 },
                 {
-                    "dataMin" : "",
-                    "dataMax" : "",
+                    "dataMin" : "51",
+                    "dataMax" : "55",
                     "loot" : "Soiled handkerchief."
                 },
                 {
-                    "dataMin" : "",
-                    "dataMax" : "",
+                    "dataMin" : "56",
+                    "dataMax" : "60",
                     "loot" : "2d4 cp"
                 },
                 {
-                    "dataMin" : "",
-                    "dataMax" : "",
+                    "dataMin" : "61",
+                    "dataMax" : "65",
                     "loot" : "3d6 cp"
                 },
                 {
-                    "dataMin" : "",
-                    "dataMax" : "",
+                    "dataMin" : "66",
+                    "dataMax" : "70",
                     "loot" : "1d6 sp and 2d6 cp"
                 },
                 {
-                    "dataMin" : "",
-                    "dataMax" : "",
+                    "dataMin" : "71",
+                    "dataMax" : "75",
                     "loot" : "1d4 gp"
                 },
                 {
-                    "dataMin" : "",
-                    "dataMax" : "",
+                    "dataMin" : "76",
+                    "dataMax" : "80",
                     "loot" : "2d4 gp and 1d10 sp"
-                }
+                },
+                {
+                    "dataMin" : "81",
+                    "dataMax" : "85",
+                    "loot" : "2d4 gp and 2d10 sp"
+                },
+                {
+                    "dataMin" : "86",
+                    "dataMax" : "90",
+                    "loot" : "Smoking pipe and tobacco"
+                },
+                {
+                    "dataMin" : "91",
+                    "dataMax" : "95",
+                    "loot" : "Coin with two faces"
+                },
+                {
+                    "dataMin" : "96",
+                    "dataMax" : "100",
+                    "loot" : "Thieves Tools"
+                },
             ]
         }
     ]
