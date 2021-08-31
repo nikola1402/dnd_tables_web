@@ -1,7 +1,7 @@
 {
     "tables" : [
         {
-            "tableName" : "pocket_loot_table",
+            "tableName" : "pocket-loot-table",
             "columns" : [
                 "d100",
                 "Loot"
